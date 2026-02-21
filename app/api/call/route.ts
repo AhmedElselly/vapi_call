@@ -2,7 +2,7 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
     console.log({ body });
-    console.log({ assistantId: process.env.VAPI_ASSISTANT_ID });
+    console.log({ assistantId: process.env.NEXT_PUBLIC_VAPI_ASSISTANT_ID });
     console.log({ phoneNumberId: process.env.VAPI_PHONE_NUMBER_ID });
 
     const { phone } = body;
@@ -18,7 +18,7 @@ export async function POST(req: Request) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        assistantId: process.env.VAPI_ASSISTANT_ID,
+        assistantId: process.env.NEXT_PUBLIC_VAPI_ASSISTANT_ID,
         phoneNumberId: process.env.VAPI_PHONE_NUMBER_ID,
         customer: {
           number: phone,

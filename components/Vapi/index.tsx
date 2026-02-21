@@ -13,6 +13,7 @@ const VapiWidget: React.FC<VapiWidgetProps> = ({
   assistantId,
   config = {},
 }) => {
+  console.log({ assistantId });
   const [vapi, setVapi] = useState<Vapi | null>(null);
   const [isConnected, setIsConnected] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);

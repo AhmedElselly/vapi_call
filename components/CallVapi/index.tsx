@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { toast } from "sonner";
 
 export default function Home() {
   const [phone, setPhone] = useState("");
@@ -10,29 +11,40 @@ export default function Home() {
 
   // START CALL
   const makeCall = async () => {
-    setLoading(true);
-    setStatus("Calling...");
+    try {
+      setLoading(true);
+      setStatus("Calling...");
 
-    const res = await fetch("/api/call", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ phone }),
-    });
+      const res = await fetch("/api/call", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ phone }),
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    console.log({ data: data.callId });
+      console.log("SERVER RESPONSE:", data);
 
-    if (res.ok) {
+      if (data.statusCode === 400) {
+        const errorMessage =
+          data?.error || data?.message || "Something went wrong";
+        toast.error(data?.message);
+        setStatus(`❌ ${errorMessage}: ${data?.message}`);
+        return;
+      }
+
       setCallId(data.callId);
+      toast.success("Call started successfully 📞");
       setStatus("✅ Call Started");
-    } else {
-      setStatus("❌ Failed");
-    }
+    } catch (err) {
+      console.error(err);
 
-    setLoading(false);
+      setStatus("❌ Network Error");
+    } finally {
+      setLoading(false);
+    }
   };
 
   // END CALL
