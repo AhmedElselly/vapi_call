@@ -68,7 +68,7 @@ export default function Home() {
   };
 
   return (
-    <main
+    <div
       style={{
         height: "100vh",
         display: "flex",
@@ -78,12 +78,14 @@ export default function Home() {
       }}
     >
       <div
-        style={{
-          width: 400,
-          padding: 30,
-          border: "1px solid #ddd",
-          borderRadius: 10,
-        }}
+        className="
+					w-full
+					max-w-md
+					p-6 sm:p-8
+					border border-zinc-200
+					rounded-xl
+					bg-white dark:bg-zinc-900
+				"
       >
         <h2>AI Calling Agent</h2>
 
@@ -129,6 +131,6 @@ export default function Home() {
 
         <p style={{ marginTop: 20 }}>{status}</p>
       </div>
-    </main>
+    </div>
   );
 }
