@@ -37,7 +37,7 @@ export default function HomeComponent() {
       </div>
 
       {/* Content */}
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center px-8">
         {activeTab === "voice" && (
           <VapiWidget
             apiKey={process.env.NEXT_PUBLIC_VAPI_PUBLIC_KEY || ""}
