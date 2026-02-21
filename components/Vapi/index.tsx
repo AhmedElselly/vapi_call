@@ -68,9 +68,16 @@ const VapiWidget: React.FC<VapiWidgetProps> = ({
     };
   }, [apiKey]);
 
-  const startCall = () => {
-    if (vapi) {
-      vapi.start(assistantId);
+  const startCall = async () => {
+    try {
+      // 🔥 Request mic permission first (mobile fix)
+      await navigator.mediaDevices.getUserMedia({ audio: true });
+
+      if (vapi) {
+        vapi.start(assistantId);
+      }
+    } catch (err) {
+      console.error("Microphone permission denied", err);
     }
   };
 
